@@ -1,0 +1,142 @@
+:root {
+  --pastel-peach: #ffe5b4;
+  --pastel-mint: #b8f2e6;
+  --pastel-lavender: #d7bde2;
+  --pastel-blue: #aec6cf;
+  --pastel-pink: #f7c6c7;
+  --pastel-beige: #f5f5dc;
+  --pastel-grey: #e4e4e4;
+  --pastel-yellow: #fff3b0;
+  --text-dark: #3e3e3e;
+}
+
+/* Layout Base */
+body {
+  background-color: var(--pastel-beige);
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+   overflow-x: hidden;
+  color: var(--text-dark);
+}
+
+/* Main content */
+.main-content {
+  padding: 2rem;
+}
+
+/* Banner Section */
+.split-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(120deg, var(--pastel-pink), var(--pastel-blue));
+  border-radius: 20px;
+  padding: 3rem;
+  margin-bottom: 2rem;
+}
+
+.banner-text {
+  flex: 1;
+  color: var(--text-dark);
+}
+
+.banner-text h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  color: #1e3a5f;
+}
+
+.banner-text p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.banner-text button {
+  background-color: var(--pastel-blue);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.banner-text button:hover {
+  background-color: var(--pastel-yellow);
+}
+
+.banner-image {
+  flex: 1;
+  display: flex;
+  justify-content: center;  
+
+}
+
+.banner-image img {
+  max-width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+@media (max-width: 768px) {
+  .banner-image {
+    background-image: url('3398ee8f-ffcb-4010-9081-21f139ca3218.png');
+  }
+}
+
+/* Post list */
+.author-name {
+  font-size: 1.2rem;
+  color: var(--pastel-lavender);
+}
+
+.title {
+  font-size: 1.5rem;
+  color: var(--pastel-peach);
+}
+
+button {
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background-color: var(--pastel-blue);
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background-color: var(--pastel-mint);
+}
+.post-template {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px;
+}
+
+.post-card {
+  display: flex;
+  justify-content: center;
+}
+.btn-grp {
+  margin: 60px;
+}
+.btn-group {
+  margin-top: 10px;
+}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 0.4rem;
+  }
+
+  .submit {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    
+  }
+  p {
+    font-size: 0.6;
+  }
+}

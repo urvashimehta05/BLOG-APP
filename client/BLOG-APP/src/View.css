@@ -1,0 +1,6 @@
+.card-detail {
+display: flex;
+  justify-content: center; /* centers horizontally */
+  margin-top: 40px; /* optional spacing */
+  margin-bottom: 40px;
+}

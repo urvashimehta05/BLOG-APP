@@ -1,0 +1,106 @@
+/* Universal resets */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body and container */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  padding: 20px;
+}
+
+/* Main form layout */
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Title & Textarea styling */
+#title,
+#content,
+#image,
+input[type='text'],
+input[type='email'],
+input[type='password'] {
+  width: 100%;
+  padding: 15px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  text-align: left;
+  background-color: #fafafa;
+}
+
+#content {
+  height: 200px;
+  resize: vertical;
+}
+
+/* Button styling */
+.submit {
+  background-color: #3e3e3e;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  padding: 12px 30px;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
+
+.submit:hover {
+  background-color: #5c5c5c;
+}
+
+/* Labels */
+label {
+  align-self: flex-start;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+/* Headings */
+h1, h2 {
+  margin-bottom: 10px;
+  text-align: center;
+  color: #2c2c2c;
+}
+
+/* Error or toast messages (optional style for toastify) */
+.Toastify__toast--error {
+  background: #ff4d4f;
+  color: white;
+}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .submit {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .submit {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
