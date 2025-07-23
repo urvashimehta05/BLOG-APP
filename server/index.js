@@ -12,7 +12,8 @@ const {isLoggedIn} = require("./middleware.js")
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173", // ✅ Vite frontend
+  origin: ["https://blog-app-s4pa.vercel.app/"],
+  methods: ["POST',"GET"],
   credentials: true // ✅ Required for cookies
 }));
 
