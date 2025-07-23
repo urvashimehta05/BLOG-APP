@@ -12,7 +12,7 @@ const {isLoggedIn} = require("./middleware.js")
 const app = express();
 
 app.use(cors({
-  origin: ["https://blog-app-s4pa.vercel.app/"],
+  origin: "http://localhost:5173"
   methods: ["POST',"GET"],
   credentials: true // ✅ Required for cookies
 }));
