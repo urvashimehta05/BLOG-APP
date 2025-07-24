@@ -5,8 +5,9 @@ export default function Logout() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/logout", {
+    fetch("http://localhost:5000/api/logout", {
       method: "POST",
+      mode: 'cors',
       credentials: "include"
     })
       .then(() => {

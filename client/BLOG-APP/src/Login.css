@@ -60,3 +60,13 @@ input[type="password"]:focus {
   background-color: #d7bde2;
   cursor: not-allowed;
 }
+@media (max-width: 480px) {
+  h1 {
+    font-size: 1.2rem;
+  }
+
+  .submit {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+  }
+}
