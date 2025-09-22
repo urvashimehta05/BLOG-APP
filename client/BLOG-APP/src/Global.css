@@ -36,8 +36,10 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-size: 1rem;
+  box-sizing: border-box; /* ensures padding doesn’t break width */
 }
 
+/* Buttons */
 button, .btn {
   background-color: #1976d2;
   color: white;
