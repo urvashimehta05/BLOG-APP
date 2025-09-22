@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 import '../signup.css';
 import '../Global.css';
+
 const API_BASE = import.meta.env.VITE_BACKEND_URL;
+
 export default function Signup() {
   const [signupForm, setSignupForm] = useState({
     username: '',
     email: '',
     password: ''
   });
-
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const formChange = (event) => {
@@ -23,35 +26,31 @@ export default function Signup() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setLoading(true);
     const { username, email, password } = signupForm;
 
     try {
-      const res = await fetch(`${API_BASE}/api/signup`, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        mode: 'cors',
-        credentials: 'include', 
-        body: JSON.stringify({ username, email, password })
-      });
+      const res = await axios.post(
+        `${API_BASE}/api/signup`,
+        { username, email, password },
+        { withCredentials: true }
+      );
 
-      const data = await res.json();
-      if (res.ok) {
-        toast.success('Signup successful! Please log in.');
-        navigate('/posts/login');
-      } else {
-        console.error('Signup error:', data);
-        toast.error(data.error || 'Signup failed');
-      }
+      toast.success('Signup successful! Please log in.');
+      navigate('/posts/login');
     } catch (err) {
-      console.error('Error during signup:', err);
-      toast.error('Something went wrong. Please try again.');
+      console.error('Signup error:', err.response || err);
+      toast.error(err.response?.data?.error || 'Signup failed. Please try again.');
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
     <div className='signup-form'>
       <form onSubmit={handleSubmit}>
-        <h2>Sign up </h2>
+        <h2>Sign up</h2>
+
         <label htmlFor='username'>Username</label>
         <input
           type='text'
@@ -60,7 +59,9 @@ export default function Signup() {
           value={signupForm.username}
           id='username'
           onChange={formChange}
+          required
         />
+
         <label htmlFor='email'>Email</label>
         <input
           type='email'
@@ -69,7 +70,9 @@ export default function Signup() {
           value={signupForm.email}
           id='email'
           onChange={formChange}
+          required
         />
+
         <label htmlFor='password'>Password</label>
         <input
           type='password'
@@ -78,8 +81,12 @@ export default function Signup() {
           value={signupForm.password}
           id='password'
           onChange={formChange}
+          required
         />
-        <button type='submit'id="submit">Sign Up</button>
+
+        <button type='submit' id='submit' disabled={loading}>
+          {loading ? 'Signing Up...' : 'Sign Up'}
+        </button>
       </form>
     </div>
   );

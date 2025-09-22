@@ -2,72 +2,82 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import axios from 'axios';
 import '../Login.css';
-import '../Global.css'
+import '../Global.css';
+
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
+
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-const API_BASE = import.meta.env.VITE_BACKEND_URL;
+
   const handleLogin = async () => {
-  try {
-    const res = await fetch(`${API_BASE}/api/login`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include', // sends cookie
-      body: JSON.stringify({ username, password })
-    });
+    if (!username || !password) {
+      toast.error('Please enter username and password');
+      return;
+    }
 
-    const data = await res.json();
+    setLoading(true);
 
-    if (res.ok) {
-      // ✅ Verify that session was actually set on server
-      const authRes = await fetch(`${API_BASE}/api/test-auth`, {
-        method: 'GET',
-        credentials: 'include'
-      });
+    try {
+      // 1️⃣ Login request
+      const res = await axios.post(
+        `${API_BASE}/api/login`,
+        { username, password },
+        { withCredentials: true }
+      );
 
-      const authData = await authRes.json();
-      console.log("Auth check after login:", authData);
+      // 2️⃣ Verify session
+      const authRes = await axios.get(`${API_BASE}/api/test-auth`, { withCredentials: true });
 
-      if (authData.isLoggedIn) {
+      if (authRes.data.isLoggedIn) {
         localStorage.setItem('isLoggedIn', 'true');
         toast.success('Login successful');
-        window.dispatchEvent(new Event('login'));
+        window.dispatchEvent(new Event('login')); // optional global login event
         navigate('/posts');
       } else {
-        toast.error("Login failed — session not established");
+        toast.error('Login failed — session not established');
       }
-    } else {
-      console.error('Login error:', data);
-      toast.error(data.message || 'Login failed');
-    }
-  } catch (err) {
-    console.error('Error during login:', err);
-    toast.error('Login request failed');
-  }
-};
 
+    } catch (err) {
+      console.error('Login error:', err.response || err);
+      toast.error(err.response?.data?.message || 'Login request failed');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <div className='login-page'>
       <h2 className='login-h1'>Login</h2>
+
       <input
         type='text'
         className='user-input'
         value={username}
         onChange={e => setUsername(e.target.value)}
         placeholder='Username'
+        required
       />
+
       <input
         type='password'
         className='user-input'
         value={password}
         onChange={e => setPassword(e.target.value)}
         placeholder='Password'
+        required
       />
-      <button onClick={handleLogin} className='submit'>
-        Login
+
+      <button
+        onClick={handleLogin}
+        className='submit'
+        disabled={loading}
+      >
+        {loading ? 'Logging in...' : 'Login'}
       </button>
     </div>
   );
