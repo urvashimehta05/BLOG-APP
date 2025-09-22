@@ -32,6 +32,9 @@
   justify-content: center;
   transition: background 0.3s ease;
 }
+#submit:hover {
+  background-color: #1E3A54;
+}
 @media (max-width: 480px) {
   h1 {
     font-size: 1.2rem;

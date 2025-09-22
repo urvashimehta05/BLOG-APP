@@ -29,7 +29,7 @@ export default function Create() {
         headers: {
           'Content-Type': 'application/json'
         },
-         credentials: 'include', // ✅ Add this
+         credentials: 'include', 
          mode: 'cors',
       body: JSON.stringify({ post: formData })
       });

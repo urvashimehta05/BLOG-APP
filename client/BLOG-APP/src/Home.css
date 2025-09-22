@@ -16,7 +16,7 @@ body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
   padding: 0;
-   overflow-x: hidden;
+   /* overflow-x: hidden; */
   color: var(--text-dark);
 }
 
@@ -37,14 +37,15 @@ body {
 }
 
 .banner-text {
-  flex: 1;
   color: var(--text-dark);
 }
 
 .banner-text h1 {
   font-size: 3rem;
-  margin-bottom: 1rem;
+  margin-bottom: 40px;
   color: #1e3a5f;
+  overflow: hidden;
+  padding: .4rem;
 }
 
 .banner-text p {
@@ -53,8 +54,9 @@ body {
 }
 
 .banner-text button {
-  background-color: var(--pastel-blue);
+  background-color: #1E3A54;
   border: none;
+  color:#fff;
   padding: 0.8rem 1.5rem;
   font-size: 1rem;
   border-radius: 10px;
@@ -63,7 +65,8 @@ body {
 }
 
 .banner-text button:hover {
-  background-color: var(--pastel-yellow);
+  color:#3e3e3e;
+  background-color:#fff;
 }
 
 .banner-image {
@@ -110,15 +113,26 @@ button:hover {
 }
 .post-template {
   display: flex;
+  flex-direction: row;
+  gap:20px;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-  padding: 20px;
 }
 
 .post-card {
   display: flex;
+   max-height: 700px;
+   overflow: hidden;
+   flex-direction: column;
+   gap: 20px;
   justify-content: center;
+   transition: transform 0.2s ease, box-shadow 0.2s ease; 
+   padding: 0.4rem;
+   min-width: 300px;
+}
+.post-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgb(170, 213, 230);
 }
 .btn-grp {
   margin: 60px;

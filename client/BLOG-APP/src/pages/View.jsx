@@ -14,7 +14,6 @@ export default function View() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  // Get current user
   useEffect(() => {
     fetch("http://localhost:5000/api/test-auth", {
       credentials: 'include',

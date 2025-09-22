@@ -53,20 +53,22 @@ export default function Layout() {
     <div>
       <header className='header'>
         <div className="left">
-          <Link to="/" className="logo">MyBlog</Link>
+          <Link to="/" className="links">MyBlog</Link>
         </div>
         <div className="right">
           <nav>
             {isLoggedIn ? (
               <div className='header-links'>
-                <button onClick={handleLogout}>Logout</button>
-                <Link to="/posts/create">Create new post</Link>
+                <span><Link to="/posts"  className="links">Home</Link></span> 
+                <button onClick={handleLogout} class="btn-logout">Logout</button>
+                <Link to="/posts/create" class="links">Create new post</Link>
               </div>
             ) : (
               <div className='header-links'>
-                <Link to="/posts/login">Login</Link>
-                <Link to="/posts/signup">Register</Link>
-                <Link to="/posts/create">Create new post</Link>
+                <span><Link to="/posts"  className="links">Home</Link></span>  
+              <span><Link to="/posts/login"  className="links">Login</Link></span>  
+                <span><Link to="/posts/signup" className="links">Register</Link></span>
+               <span> <Link to="/posts/create" className="links">Create new post</Link></span>
               </div>
             )}
           </nav>

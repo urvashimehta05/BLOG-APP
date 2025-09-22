@@ -1,4 +1,3 @@
-// src/components/Signup.jsx
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -30,7 +29,7 @@ export default function Signup() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         mode: 'cors',
-        credentials: 'include', // Include session cookies
+        credentials: 'include', 
         body: JSON.stringify({ username, email, password })
       });
 

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
-const User = require("./models/User"); // your user model
+const User = require("./models/User"); 
 const cors = require("cors");
 const Blog = require("./models/Post");
 const cookieParser = require("cookie-parser");
@@ -12,13 +12,12 @@ const {isLoggedIn} = require("./middleware.js")
 const app = express();
 
 app.use(cors({
-  origin: "http://localhost:5173"
-  methods: ["POST',"GET"],
-  credentials: true // ✅ Required for cookies
+  origin: "http://localhost:5173",
+  credentials: true 
 }));
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // ✅ IMPORTANT for login form
+app.use(express.urlencoded({ extended: true })); 
 app.use(cookieParser());
 
 app.use(session({
@@ -40,8 +39,6 @@ passport.use(new LocalStrategy(User.authenticate())); // ✅ passport-local-mong
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
-
-// === DATABASE CONNECTION ===
 mongoose.connect('mongodb://localhost:27017/', {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -49,7 +46,6 @@ mongoose.connect('mongodb://localhost:27017/', {
 .then(() => console.log('✅ Connected to MongoDB'))
 .catch(err => console.error('❌ MongoDB connection error:', err));
 
-// === AUTH CHECK ROUTE ===
 app.get('/api/test-auth', (req, res) => {
   if (req.isAuthenticated()) {
     return res.json({
@@ -63,7 +59,6 @@ app.get('/api/test-auth', (req, res) => {
   }
 });
 
-// === BLOG ROUTES ===
 app.get('/api/posts', async (req, res) => {
   try {
     const posts = await Blog.find({}).populate("owner", 'username email');
@@ -85,20 +80,10 @@ app.post('/api/posts', isLoggedIn, async (req, res) => {
   }
 });
 
-// app.get('/api/posts/:id', isLoggedIn, async (req, res) => {
-//   try {
-//     const post = await Blog.findById(req.params.id).populate("owner",);
-//     if (!post) return res.status(404).json({ message: 'Post not found' });
-//     res.json(post);
-//     console.log(post);
-//   } catch (error) {
-//     res.status(500).json({ message: 'Error fetching post', error });
-//   }
-// });
 app.get('/api/posts/:id', isLoggedIn, async (req, res) => {
   try {
     const post = await Blog.findById(req.params.id)
-      .populate('owner'); // 👈 this must match 'ref' in Blog schema
+      .populate('owner'); 
 
     if (!post) return res.status(404).json({ message: 'Post not found' });
 
@@ -141,7 +126,6 @@ app.put('/api/posts/update/:id', isLoggedIn, async (req, res) => {
   }
 });
 
-// === AUTH ROUTES ===
 app.post('/api/signup', async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
@@ -180,7 +164,6 @@ app.post('/api/logout', (req, res) => {
   });
 });
 
-// Debugging route (optional)
 app.get('/api/debug-session', (req, res) => {
   res.json({
     session: req.session,
@@ -191,7 +174,6 @@ app.get('/api/debug-session', (req, res) => {
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });
 });
-// === SERVER START ===
 app.listen(5000, () => {
   console.log('🚀 Backend running at http://localhost:5000');
 });

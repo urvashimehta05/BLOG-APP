@@ -11,13 +11,13 @@ export default function Logout() {
       credentials: "include"
     })
       .then(() => {
-        localStorage.removeItem("isLoggedIn"); // Clear login status
-        navigate('/login'); // Redirect to login
+        localStorage.removeItem("isLoggedIn"); 
+        navigate('/login'); 
       })
       .catch((err) => {
         console.error("Logout failed:", err);
       });
   }, []);
 
-  return null; // or a loading spinner/message if you want
+  return null; 
 }
