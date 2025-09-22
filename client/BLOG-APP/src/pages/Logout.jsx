@@ -1,11 +1,11 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
 export default function Logout() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/logout", {
+    fetch(`${API_BASE}/api/logout`, {
       method: "POST",
       mode: 'cors',
       credentials: "include"

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
 import '../Update.css'
 export default function Update() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ export default function Update() {
   });
 
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${id}`, {
+    fetch(`${API_BASE}/api/posts/${id}`, {
       credentials: 'include'
     })
       .then((res) => res.json())

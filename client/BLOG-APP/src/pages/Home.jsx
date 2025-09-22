@@ -9,21 +9,20 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
 function Home() {
   const [posts, setPosts] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const navigate = useNavigate();
 
-  useEffect(() => {
-    fetch('http://localhost:5000/api/posts',{
-      credentials: 'include',
-    })
-      .then((res) => res.json())
-      .then((data) => setPosts(data))
-      .catch((err) => console.error('Error fetching posts:', err));
-  }, []);
-
+useEffect(() => {
+  fetch(`${API_BASE}/api/posts`, {
+    credentials: 'include',
+  })
+    .then((res) => res.json())
+    .then((data) => setPosts(data))
+    .catch((err) => console.error('Error fetching posts:', err));
+}, []);
   const filteredPosts = posts.filter((post) =>
     (post.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
     (post.author || '').toLowerCase().includes(searchTerm.toLowerCase()) ||

@@ -4,6 +4,7 @@ import '../Create.css';
 import { toast } from 'react-toastify';
 import '../Global.css'
 export default function Create() {
+  const API_BASE = import.meta.env.VITE_BACKEND_URL;
   const [formData, setFormData] = useState({
     title: "",
     content: "",
@@ -24,7 +25,7 @@ export default function Create() {
     event.preventDefault();
 
     try {
-      const res = await fetch('http://localhost:5000/api/posts', {
+      const res = await fetch(`${API_BASE}/api/posts`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

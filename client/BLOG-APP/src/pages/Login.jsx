@@ -8,10 +8,10 @@ export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
-
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
   const handleLogin = async () => {
   try {
-    const res = await fetch('http://localhost:5000/api/login', {
+    const res = await fetch(`${API_BASE}/api/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include', // sends cookie
@@ -22,7 +22,7 @@ export default function Login() {
 
     if (res.ok) {
       // ✅ Verify that session was actually set on server
-      const authRes = await fetch('http://localhost:5000/api/test-auth', {
+      const authRes = await fetch(`${API_BASE}/api/test-auth`, {
         method: 'GET',
         credentials: 'include'
       });

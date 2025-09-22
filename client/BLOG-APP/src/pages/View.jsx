@@ -5,6 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import CardActionArea from '@mui/material/CardActionArea';
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
 import Button from '@mui/material/Button';
 import '../View.css';
 import '../Global.css'
@@ -15,7 +16,7 @@ export default function View() {
   const { id } = useParams();
 
   useEffect(() => {
-    fetch("http://localhost:5000/api/test-auth", {
+    fetch(`${API_BASE}/api/test-auth`, {
       credentials: 'include',
     })
       .then(res => {
@@ -31,7 +32,7 @@ export default function View() {
 
   // Fetch post
   useEffect(() => {
-    fetch(`http://localhost:5000/api/posts/${id}`, {
+    fetch(`${API_BASE}/api/posts/${id}`, {
       credentials: 'include',
     })
       .then(res => {
@@ -52,7 +53,7 @@ export default function View() {
     if (!confirmDelete) return;
 
     try {
-      const res = await fetch(`http://localhost:5000/api/posts/${post._id}`, {
+      const res = await fetch(`${API_BASE}/api/posts/${post._id}`, {
         method: 'DELETE',
         credentials: "include",
       });

@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import '../signup.css';
-import '../Global.css'
+import '../Global.css';
+const API_BASE = import.meta.env.VITE_BACKEND_URL;
 export default function Signup() {
   const [signupForm, setSignupForm] = useState({
     username: '',
@@ -25,7 +26,7 @@ export default function Signup() {
     const { username, email, password } = signupForm;
 
     try {
-      const res = await fetch('http://localhost:5000/api/signup', {
+      const res = await fetch(`${API_BASE}/api/signup`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         mode: 'cors',
